@@ -925,7 +925,7 @@ inline int getW(const Dims& d)
 inline void loadLibrary(const std::string& path)
 {
 #ifdef _MSC_VER
-    void* handle = LoadLibrary(path.c_str());
+    void* handle = LoadLibraryA(path.c_str());
 #else
     int32_t flags{RTLD_LAZY};
 #if ENABLE_ASAN
