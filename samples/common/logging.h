@@ -82,7 +82,13 @@ public:
         {
             // prepend timestamp
             std::time_t timestamp = std::time(nullptr);
+#ifdef _MSC_VER
+            tm t;
+            tm* tm_local = &t;
+            localtime_s(&t, &timestamp);
+#else
             tm* tm_local = std::localtime(&timestamp);
+#endif
             mOutput << "[";
             mOutput << std::setw(2) << std::setfill('0') << 1 + tm_local->tm_mon << "/";
             mOutput << std::setw(2) << std::setfill('0') << tm_local->tm_mday << "/";
